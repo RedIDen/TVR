@@ -38,7 +38,10 @@
 ## 3. Требования к интерфейсу
 ### 3.1 Пользовательский интерфейс
 Главное меню игры  
-![image](https://user-images.githubusercontent.com/83085936/151652798-89aa02a1-1432-42ac-80e6-e272e5be3bcb.png)
+![image](https://user-images.githubusercontent.com/83085936/151652798-89aa02a1-1432-42ac-80e6-e272e5be3bcb.png)  
+Внешний вид персонажей игры  
+![изображение](https://user-images.githubusercontent.com/95035718/151653716-9d5509cf-bca0-404b-a6c2-2cd62f9a1778.png)
+
 ## 4. Функциональные требования
 - Начать игру;
 - Настройки;
