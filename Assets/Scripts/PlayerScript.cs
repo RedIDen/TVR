@@ -14,7 +14,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject lowerBody;
     public GameObject bloodEffect;
     public Transform diePoint;
-    public ShotGunScript weapon;
+    public WeaponScript weapon;
 
     private Rigidbody2D rigidBody;
     private Animator animator;
@@ -39,7 +39,6 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if (Input.GetKeyDown(this.shoot))
         {
             this.Shoot();
@@ -86,7 +85,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (this.weapon.Shoot())
         {
-            var force = transform.localScale.x < 0 ? transform.right * 20 : -transform.right * 20;
+            var force = transform.localScale.x < 0 ? transform.right * weapon.recoil : -transform.right * weapon.recoil;
             this.rigidBody.AddForce(force, ForceMode2D.Impulse);
             this.animator.Play("run");
         }

@@ -1,14 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class ShotGunScript : MonoBehaviour
+public class ShotGunScript : WeaponScript
 {
-    public Transform shootPoint;
-    public GameObject bullet;
-    public Transform effectPoint;
-    public GameObject effect;
-
-    public float timeBetweenShots = 0.0f;
     private float timeAfterShot = 0.0f;
 
     // Start is called before the first frame update
@@ -33,7 +27,7 @@ public class ShotGunScript : MonoBehaviour
         yield return new WaitForSeconds(timeOut);
     }
 
-    public bool Shoot()
+    public override bool Shoot()
     {
         if (this.timeAfterShot <= 0)
         {
