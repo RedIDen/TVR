@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShotGunScript : MonoBehaviour
@@ -25,6 +24,13 @@ public class ShotGunScript : MonoBehaviour
         {
             this.timeAfterShot -= Time.deltaTime;
         }
+
+        StartCoroutine(ShootDelay(100f));
+    }
+
+    IEnumerator ShootDelay(float timeOut)
+    {
+        yield return new WaitForSeconds(timeOut);
     }
 
     public bool Shoot()

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
@@ -23,12 +21,12 @@ public class PlayerScript : MonoBehaviour
 
     private bool isGrounded;
     private bool isDead;
-    private bool isTurndeRight = true;
+    private bool isTurnedRight = true;
 
     private Anims State
     {
-        get { return (Anims)animator.GetInteger("state"); }
-        set { animator.SetInteger("state", (int)value); }
+        get => (Anims)animator.GetInteger("state");
+        set => animator.SetInteger("state", (int)value);
     }
 
     // Start is called before the first frame update
@@ -41,6 +39,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetKeyDown(this.shoot))
         {
             this.Shoot();
@@ -67,23 +66,20 @@ public class PlayerScript : MonoBehaviour
 
     private void Run(bool isGoingRight)
     {
+        //velocity
         var axis = isGoingRight ? 1 : -1;
-        Vector3 direction = transform.right * axis;
+        var direction = transform.right * axis;
         transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, this.speed * Time.deltaTime);
-        if (axis > 0.0f && !this.isTurndeRight || axis < 0.0f && this.isTurndeRight)
-        {
-            this.isTurndeRight = !isTurndeRight;
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.y);
-        }
+        if ((!(axis > 0.0f) || this.isTurnedRight) && (!(axis < 0.0f) || !this.isTurnedRight)) return;
+        this.isTurnedRight = !isTurnedRight;
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     private void Jump()
     {
-        if (this.isGrounded)
-        {
-            this.rigidBody.AddForce(transform.up * this.jumpStrength, ForceMode2D.Impulse);
-            this.isGrounded = false;
-        }
+        if (!this.isGrounded) return;
+        this.rigidBody.AddForce(transform.up * this.jumpStrength, ForceMode2D.Impulse);
+        this.isGrounded = false;
     }
 
     private void Shoot()
@@ -105,20 +101,28 @@ public class PlayerScript : MonoBehaviour
             Instantiate(upperBody, diePoint.transform.position, diePoint.transform.rotation).transform.localScale = transform.localScale;
             Instantiate(lowerBody, diePoint.transform.position, diePoint.transform.rotation).transform.localScale = transform.localScale;
         }
-
+        //SetActive() false// transform begin //SetActive(true) //Неуязвимость на 1 сек или только первого выстрела через корутины  
         Destroy(gameObject);
     }
 
+    private void OnDisable()
+    {
+        //transform.position = new Vector2();
+        //this.gameObject.SetActive(true);
+    }
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "ground")
+        if (collision.gameObject.tag == "ground" ||
+            collision.gameObject.tag == "jumpable")
         {
             this.isGrounded = true;
         }
     }
 }
 
-enum Anims
+internal enum Anims
 {
     Idle = 0,
     Run = 1,

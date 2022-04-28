@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4142902041405165565}
   m_Layer: 0
   m_Name: red_downer
-  m_TagString: Untagged
+  m_TagString: jumpable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

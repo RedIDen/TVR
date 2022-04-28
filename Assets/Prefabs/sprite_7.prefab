@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5962622681500688500}
   m_Layer: 0
   m_Name: sprite_7
-  m_TagString: Untagged
+  m_TagString: jumpable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
