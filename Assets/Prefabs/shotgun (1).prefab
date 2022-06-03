@@ -98,10 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c6c37290aac97244b549a5eda371329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotPoint: {fileID: 6239989276845814832}
-  bullet: {fileID: 2524381156038644963, guid: 560a548ba69dcfe48bc4017bc7ae8a06, type: 3}
+  shootPoint: {fileID: 0}
   effectPoint: {fileID: 6381511848857109922}
   effect: {fileID: 8009828277131797601, guid: 12829e5011dae9b429ceeb5261b4c651, type: 3}
+  bullet: {fileID: 2524381156038644963, guid: 560a548ba69dcfe48bc4017bc7ae8a06, type: 3}
+  weight: 1
+  recoil: 20
   timeBetweenShots: 0.5
 --- !u!61 &2874557569221534149
 BoxCollider2D:

@@ -54,12 +54,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\PlayerScript.cs" />
+    <Compile Include="Assets\Scripts\WeaponScript.cs" />
     <Compile Include="Assets\Scripts\BulletScript.cs" />
     <Compile Include="Assets\Scripts\Reset.cs" />
     <Compile Include="Assets\Scripts\EnemyScript.cs" />
     <Compile Include="Assets\Scripts\RestartSceneScript.cs" />
     <Compile Include="Assets\Scripts\ShotGunScript.cs" />
-    <Compile Include="Assets\Scripts\WeaponScript.cs" />
+    <Compile Include="Assets\Scripts\RifleScript.cs" />
+    <Compile Include="Assets\Scripts\LaserScript.cs" />
+    <Compile Include="Assets\Scripts\LaserShotScropt.cs" />
+    <Compile Include="Assets\Scripts\DiscScript.cs" />
+    <Compile Include="Assets\Scripts\SawScript.cs" />
+    <Compile Include="Assets\Scripts\WeaponSpawnerScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

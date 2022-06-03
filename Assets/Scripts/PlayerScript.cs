@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
@@ -9,12 +10,15 @@ public class PlayerScript : MonoBehaviour
     public KeyCode right;
     public KeyCode jump;
     public KeyCode shoot;
+    public KeyCode changeWeapon;
 
     public GameObject upperBody;
     public GameObject lowerBody;
     public GameObject bloodEffect;
     public Transform diePoint;
-    public WeaponScript weapon;
+
+    private WeaponScript weapon;
+    public WeaponScript[] weapons;
 
     private Rigidbody2D rigidBody;
     private Animator animator;
@@ -34,6 +38,8 @@ public class PlayerScript : MonoBehaviour
     {
         this.rigidBody = GetComponent<Rigidbody2D>();
         this.animator = GetComponent<Animator>();
+
+        this.weapon = this.weapons[0];
     }
 
     // Update is called once per frame
@@ -68,7 +74,7 @@ public class PlayerScript : MonoBehaviour
         //velocity
         var axis = isGoingRight ? 1 : -1;
         var direction = transform.right * axis;
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, this.speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, this.speed / this.weapon.weight * Time.deltaTime);
         if ((!(axis > 0.0f) || this.isTurnedRight) && (!(axis < 0.0f) || !this.isTurnedRight)) return;
         this.isTurnedRight = !isTurnedRight;
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -100,15 +106,10 @@ public class PlayerScript : MonoBehaviour
             Instantiate(upperBody, diePoint.transform.position, diePoint.transform.rotation).transform.localScale = transform.localScale;
             Instantiate(lowerBody, diePoint.transform.position, diePoint.transform.rotation).transform.localScale = transform.localScale;
         }
-        //SetActive() false// transform begin //SetActive(true) //Неуязвимость на 1 сек или только первого выстрела через корутины  
+
         Destroy(gameObject);
     }
 
-    private void OnDisable()
-    {
-        //transform.position = new Vector2();
-        //this.gameObject.SetActive(true);
-    }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -118,6 +119,18 @@ public class PlayerScript : MonoBehaviour
         {
             this.isGrounded = true;
         }
+    }
+
+    public void ChangeWeapon(int index)
+    {
+        this.weapon = this.weapons[index];
+
+        foreach (var item in this.weapons)
+        {
+            item.gameObject.SetActive(false);
+        }
+
+        this.weapon.gameObject.SetActive(true);
     }
 }
 
